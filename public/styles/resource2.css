@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  background-color: purple;
+  height: 90px;
+  text-align: center;
+  color: white;
+  line-height: 90px;
+}
+
+.search-container {
+  width: 800px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+}
+
+.search-input {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  float: left;
+}
+
+.search-button {
+  width: 30%;
+  padding: 10px;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.book {
+  border: 1px solid black;
+  margin: 20px auto;
+  padding: 20px;
+  width: 800px;
+  overflow: hidden;
+  clear: left;
+}
+
+.book-image {
+  float: left;
+  margin-right: 20px;
+}
+.book-image img{
+  height: 200px;
+}
+
+.book-details {
+  overflow: hidden;
+}
+
+.book-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.book-description {
+  text-align: left;
+  margin-right: 10px;
+}
+
+.buttons-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.feedback-button {
+  background-color: #666;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.view-button {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.author-name {
+  margin-bottom: 2px;
+}
+
+.year {
+  margin-top: 2px;
+  float: left;
+  margin-right: 10px;
+}
+
+
+.description-title {
+  margin-top: 2px;
+  /* float: left; */
+  margin-right: 3px;
+  margin-bottom: 2px;
+}

@@ -1,0 +1,118 @@
+/* Set's border, padding and margin to 0 for all values */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+body, html {
+  color: #373C40;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  height: 100%;
+  background-color: #f0f0f0;
+  margin: 10px;
+}
+
+body {
+  font-size: 70%;
+}
+
+p {
+  padding: 7px 0;
+  font-weight: 500;
+  font-size: 10pt;
+}
+
+a {
+  color: #656565;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #abda0f;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  color: #000000;
+  font-size: 20pt;
+  padding-left: 33px;
+  margin: 7px 5px 8px 8px;
+}
+
+h4 {
+  padding: 1px;
+  color: #ACACAC;
+  font-size: 9pt;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 800px;
+  margin: 20px auto 0px auto;
+  height: 100%;
+  background-color: #fff;
+  padding: 5px;
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+select {
+  width: calc(100% - 22px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+.gender {
+  margin-bottom: 10px;
+}
+
+/* button[type="submit"] {
+  width: 100%;
+  background-color: #1c1d1b;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+button[type="submit"]:hover {
+  background-color: #444;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+.Create {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #656565;
+}
+
+.Create:hover {
+  color: #abda0f;
+}

@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/styles/navbar.css" />
+
+<div class="navbar">
+  <div class="navbar-brand">
+    <img src="/img/logo.png" alt="Logo" />
+    <span>StudySphere</span>
+  </div>
+  <div class="navbar-links" id="navbarLinks">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="resource">Resources</a></li>
+      <li><a href="/event">Events</a></li>
+      <li><a href="/request">Request</a></li>
+      <li><a href="/feedback">Feedback</a></li>
+    </ul>
+  </div>
+  <div class="navbar-logout">
+    <% if(status) {%>
+    <a href="/logout" class="button btn btn-dark"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    <%} else {%>
+    <a href="/auth/login" class="button btn btn-dark">Login</a>
+    <% }%>
+  </div>
+</div>

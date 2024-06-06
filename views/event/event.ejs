@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/event.css" />
+    <%- include('../links') %>
+    <title>Home</title>
+  </head>
+
+  <body>
+    <%- include('../navbar') %>
+
+    <button onclick="back()" class="backBtn" id="backBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+
+    <% if(user.userType==="admin" ) { %>
+    <div class="containers" id="add">
+      <button onclick="addEvent()" class="btn btn-success" id="addBtn">
+        <i class="fa-regular fa-square-plus"></i> Add Event
+      </button>
+    </div>
+
+    <div class="containers" id="addEvent">
+      <h1>Add Event</h1>
+      <form action="/event" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="eventName">Event Name</label>
+          <input type="text" id="eventName" name="eventName" required />
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input type="text" id="companyName" name="companyName" required />
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" required />
+        </div>
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" required />
+        </div>
+        <div class="form-group">
+          <label for="date">Date of Event</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+        <div class="form-group">
+          <label for="pdfFile">Thumbanil (130X130)</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+        </div>
+        <div class="form-group">
+          <label for="type">Type of Event</label>
+          <select id="type" name="type" required>
+            <option value="technical">Technical</option>
+            <option value="skills">Skills</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <input type="text" id="desc" name="desc" />
+        </div>
+        <div id="tagsContainer">
+          <input
+            type="text"
+            id="tagsInput"
+            placeholder="Keywords (Enter to Add)"
+          />
+          <input type="hidden" id="tagsData" name="tags" value="[]" />
+        </div>
+        <button type="submit" class="btn btn-primary" id="addBtn">
+          Add Event
+        </button>
+      </form>
+    </div>
+    <% } %>
+    <div id="events">
+      <form action="/resource/search" class="search-container" method="post">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          value="<% if(search) {%><%= search %><% } %>"
+          name="search"
+        />
+        <button class="search-button btn btn-primary" type="submit">
+          Search
+        </button>
+      </form>
+      <% events.forEach(event => { %>
+      <div class="container mt-4">
+        <div class="card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img
+                src="/events/<%= event.thumbnail %>"
+                class="card-img w-100"
+                alt="Event Image"
+                sizes="100px"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= event.eventName %></h5>
+                <p class="card-text">Date of Hosting: <%= event.date %></p>
+                <p class="card-text">
+                  Key Points: <% const tag = JSON.parse(event.tags);
+                  tag.forEach(t => { %><%= t %>, <% }) %>
+                </p>
+                <p class="card-text">Description: <%= event.desc %></p>
+                <p class="card-text">Location: <%= event.location %></p>
+                <p class="card-text">Website: <a href="<%= event.website %>" target="_blank"><%= event.website %></a></p>
+                <a href="/event/<%= event._id %>" class="btn btn-primary">Apply</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <script>
+      document
+        .getElementById("tagsInput")
+        .addEventListener("keydown", function (event) {
+          const value = event.target.value.trim();
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addTag(value);
+            event.target.value = "";
+          }
+        });
+
+      function addTag(tagValue) {
+        if (tagValue) {
+          const tag = document.createElement("span");
+          tag.classList.add("tag");
+          tag.textContent = tagValue;
+
+          const close = document.createElement("span");
+          close.classList.add("close");
+          close.innerHTML = "&times;";
+          close.addEventListener("click", function () {
+            tag.remove();
+          });
+
+          tag.appendChild(close);
+
+          document
+            .getElementById("tagsContainer")
+            .insertBefore(tag, document.getElementById("tagsInput"));
+          updateTagsInput();
+        }
+      }
+
+      function updateTagsInput() {
+        const tagsArray = Array.from(document.querySelectorAll(".tag")).map(
+          (tag) => tag.textContent.trim().replace(/×/g, "")
+        );
+        document.getElementById("tagsData").value = JSON.stringify(tagsArray);
+      }
+
+      const addEvent = () => {
+        document.getElementById("add").style.display = "none";
+        document.getElementById("addEvent").style.display = "block";
+        document.getElementById("events").style.display = "none";
+        document.getElementById("backBtn").style.display = "block";
+      };
+      const back = () => {
+        document.getElementById("add").style.display = "block";
+        document.getElementById("addEvent").style.display = "none";
+        document.getElementById("events").style.display = "block";
+        document.getElementById("backBtn").style.display = "none";
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".deleteBook");
+
+        deleteButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const confirmation = confirm("Are you sure you want to delete?");
+
+            if (confirmation) {
+              window.location.href = button.href;
+            } else {
+              return false;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

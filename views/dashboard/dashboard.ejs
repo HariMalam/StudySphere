@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/dashboard.css">
+  <%- include('../links') %>
+  <title>Dashboard</title>
+</head>
+<body>
+  <%- include('../navbar') %>
+  <div class="container">
+    <section class="personal-details">
+      <h2>Personal Details</h2>
+      <ul>
+        <li><strong>Name:</strong> <%= user.name %></li>
+        <li><strong>Email:</strong> <%= user.email %></li>
+        <li><strong>Phone:</strong> <%= user.mobile %></li>
+        <li><strong>Address:</strong> <%= user.address %></li>
+      </ul>
+    </section>
+
+    <section class="educational-details">
+      <h2>Educational Details</h2>
+      <ul>
+        <li><strong>University:</strong> <%= user.university %></li>
+        <li><strong>College:</strong> <%= user.college %></li>
+        <li><strong>Branch:</strong> <%= user.branch %></li>
+        <li><strong>Semester:</strong> <%= user.semester %></li>
+        <li><strong>Enrollment:</strong> <%= user.enrollment %></li>
+      </ul>
+    </section>
+
+    <section class="book-requests">
+      <h2>Book Requests</h2>
+      <% if (requests.length === 0) { %>
+        <p>No book requests yet.</p>
+      <% } else { %>
+        <ul>
+          <% requests.forEach(request => { %>
+            <li class="request-item">
+              <div>
+                <strong>Book Name:</strong> <%= request.bookName %><br>
+                <strong>Author Name:</strong> <%= request.authorName %><br>
+                <strong>Publication:</strong> <%= request.publication %><br>
+              </div>
+              <div>
+                <strong>Requested At:</strong> <%= request.createdAt %><br>
+                <strong>Status:</strong> <%= request.status %>
+              </div>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </section>
+
+    <section class="feedbacks">
+      <h2>Feedbacks</h2>
+      <% if (feedbacks.length === 0) { %>
+        <p>No feedbacks yet.</p>
+      <% } else { %>
+        <% feedbacks.forEach(feedback => { %>
+          <div class="feedback-item">
+            <p><strong>Title:</strong> <%= feedback.title %></p>
+            <p><strong>Email:</strong> <%= feedback.email %></p>
+            <p><strong>Created At:</strong> <%= feedback.createdAt %></p>
+            <p><strong>Feedback:</strong> <%= feedback.feedback %></p>
+          </div>
+        <% }); %>
+      <% } %>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/feedback.css" />
+    <%- include('../links') %>
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('../navbar') %>
+    <div class="container">
+      <% if (user.userType === "user") { %>
+      <h1>Feedback Form</h1>
+      <form action="/feedback" method="POST">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="feedback">Feedback:</label>
+          <textarea id="feedback" name="feedback" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <% }else { %>
+      <div class="feedbacks">
+        <h2>Feedbacks</h2>
+        <% if (feedbacks.length === 0) { %>
+        <p>No feedbacks yet.</p>
+        <% } else { %> <% feedbacks.forEach(feedback => { %>
+        <div class="feedback-item">
+          <p><strong>Username:</strong> <%= feedback.username %></p>
+          <p><strong>Title:</strong> <%= feedback.title %></p>
+          <p><strong>Title:</strong> <%= feedback.createdAt %></p>
+          <p><strong>Email:</strong> <%= feedback.email %></p>
+          <p><strong>Feedback:</strong> <%= feedback.feedback %></p>
+        </div>
+        <% }); %> <% } %>
+      </div>
+
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* quote heading css */
+.container_quote {
+  color: #000000;
+  text-align: center;
+  width: 90%;
+}
+
+.EventHomepagemain {
+  color: #0b0b0b;
+}
+
+.eventbody {
+  background-color: #e5e5e5;
+}
+
+.eventbody:hover {
+  background-color: #606060;
+  color: white;
+  border-radius: 6px;
+}
+
+.evetnbutton {
+  border: #000000;
+  background-color: #595959;
+}
+.evetnbutton:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+.accomplismentsection {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.accom_details {
+  background-color: #e5e5e5;
+  color: rgb(0, 0, 0);
+  border-radius: 6px;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  color: #343a40;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.footer-links a {
+  color: #343a40;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #007bff;
+}
+
+.social-icons li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-icons a {
+  color: #007bff;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #0056b3;
+}
+
+.lastfootersocial {
+  margin-top: 40px;
+}

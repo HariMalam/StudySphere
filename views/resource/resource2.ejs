@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('../links') %>
+  <title>Resource</title>
+</head>
+<body>
+  <link rel="stylesheet" href="/styles/resource2.css">
+  <%- include('../navbar') %>
+<div class="search-container">
+    <input type="text" class="search-input" placeholder="Search...">
+    <button class="search-button" onclick="location.href='#books'">Search</button>
+</div>
+
+<div id="books">
+    <div class="book">
+        <div class="book-image">
+            <img src="/img1.jpg" alt="Book Image">
+        </div>
+        <div class="book-details">
+            <h2 class="book-title">Book Title 1</h2>
+            <p class="author-name">Author: Author Name 1</p>
+            <p class="year">Year: 2023</p>
+            <br>
+            <br>
+            <h4 class="description-title">Description:</h4>
+            <p class="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="buttons-container">
+                <button class="feedback-button" onclick="location.href='feedback.html'">Feedback</button>
+                <a href="" class="view-button btn btn-primary" target="_blank">view</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="book">
+        <div class="book-image">
+            <img src="/img2.jpg" alt="Book Image">
+        </div>
+        <div class="book-details">
+            <h2 class="book-title">Book Title 2</h2>
+            <p class="author-name">Author: Author Name 2</p>
+            <p class="year">Year: 2022</p>
+            <br>
+            <br>
+            <h4 class="description-title">Description:</h4>
+            <p class="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="buttons-container">
+                <button class="feedback-button" onclick="location.href='feedback.html'">Feedback</button>
+                <a href="" class="view-button btn btn-primary" target="_blank">view</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../links') %>
+    <link rel="stylesheet" href="/styles/resource.css" />
+    <title>Resource</title>
+  </head>
+  <body>
+    <%- include('../navbar') %>
+
+    <button onclick="back()" class="backBtn" id="backBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+
+    <% if(user.userType === "admin") { %>
+
+    <div class="containers" id="add">
+      <button onclick="addBook()" class="btn btn-success" id="addBtn">
+        <i class="fa-regular fa-square-plus"></i> Add Book
+      </button>
+    </div>
+
+    <div class="containers" id="addBook">
+      <h1>Add Book</h1>
+      <form action="/resource" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="bookName">Book Name</label>
+          <input type="text" id="bookName" name="bookName" required />
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" required />
+        </div>
+        <div class="form-group">
+          <label for="publication">Publication</label>
+          <input type="text" id="publication" name="publication" required />
+        </div>
+        <div class="form-group">
+          <label for="pdfFile">Book PDF</label>
+          <input
+            type="file"
+            id="pdfFile"
+            name="pdfFile"
+            accept=".pdf"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="type">Type</label>
+          <select id="type" name="type" required>
+            <option value="book">Book</option>
+            <option value="pyq">PYQ</option>
+            <option value="sylabuss">Sylabuss</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <input type="text" id="desc" name="desc" />
+        </div>
+        <div id="tagsContainer">
+          <input type="text" id="tagsInput" placeholder="Tags (Enter to Add)" />
+          <input type="hidden" id="tagsData" name="tags" value="[]" />
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="unschooled" name="check" />
+          For Unscolered Student?
+        </div>
+        <button type="submit" class="btn btn-primary" id="addBtn">
+          Add Book
+        </button>
+      </form>
+    </div>
+    <% } %>
+
+    <div id="resource">
+      <form action="/resource/search" class="search-container" method="post">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          value="<% if(search) {%><%= search %><% } %>"
+          name="search"
+        />
+        <button class="search-button btn btn-primary" type="submit">
+          Search
+        </button>
+      </form>
+
+      <div id="list">
+        <div class="type">Books</div>
+        <div id="books" id="books">
+          <% books.forEach(book => { %>
+          <div class="card">
+            <a
+              href="pdfs/<%= book.bookPDF %>"
+              target="_blank"
+              class="card-link btn btn-primary link"
+            >
+              <div class="image">
+                <img
+                  src="/books/<%= book.bookThumbnail %>"
+                  class="card-img-top img"
+                  alt="..."
+                />
+              </div>
+              <div class="card-body body">
+                <h6 class="card-title">
+                  <%= book.bookName %>: <%= book.desc.substring(0, 20) %> <%
+                  if(book.desc.length > 20){ %>...<% } %>
+                </h6>
+                <p class="card-text">Author: <%= book.author %></p>
+              </div>
+            </a>
+            <% if(user.userType === "admin") {%>
+            <div class="card-body delete">
+              <a
+                href="/resource/delete/<%= book._id %>"
+                class="card-link btn btn-danger deleteBook"
+                >Delete</a
+              >
+            </div>
+            <% } %>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <div id="list">
+        <div class="type">PYQs</div>
+        <div id="books" id="books">
+          <% pyqs.forEach(book => { %>
+          <div class="card">
+            <a
+              href="pdfs/<%= book.bookPDF %>"
+              target="_blank"
+              class="card-link btn btn-primary link"
+            >
+              <div class="image">
+                <img
+                  src="/books/<%= book.bookThumbnail %>"
+                  class="card-img-top img"
+                  alt="..."
+                />
+              </div>
+              <div class="card-body body">
+                <h6 class="card-title">
+                  <%= book.bookName %>: <%= book.desc.substring(0, 20) %> <%
+                  if(book.desc.length > 20){ %>...<% } %>
+                </h6>
+                <p class="card-text">Author: <%= book.author %></p>
+              </div>
+            </a>
+            <% if(user.userType === "admin") {%>
+            <div class="card-body delete">
+              <a
+                href="/resource/delete/<%= book._id %>"
+                class="card-link btn btn-danger deleteBook"
+                >Delete</a
+              >
+            </div>
+            <% } %>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <div id="list">
+        <div class="type">Sylabuss</div>
+        <div id="books" id="books">
+          <% sylabuss.forEach(book => { %>
+          <div class="card">
+            <a
+              href="pdfs/<%= book.bookPDF %>"
+              target="_blank"
+              class="card-link btn btn-primary link"
+            >
+              <div class="image">
+                <img
+                  src="/books/<%= book.bookThumbnail %>"
+                  class="card-img-top img"
+                  alt="..."
+                />
+              </div>
+              <div class="card-body body">
+                <h6 class="card-title">
+                  <%= book.bookName %>: <%= book.desc.substring(0, 20) %> <%
+                  if(book.desc.length > 20){ %>...<% } %>
+                </h6>
+                <p class="card-text">Author: <%= book.author %></p>
+              </div>
+            </a>
+            <% if(user.userType === "admin") {%>
+            <div class="card-body delete">
+              <a
+                href="/resource/delete/<%= book._id %>"
+                class="card-link btn btn-danger deleteBook"
+                >Delete</a
+              >
+            </div>
+            <% } %>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("tagsInput")
+        .addEventListener("keydown", function (event) {
+          const value = event.target.value.trim();
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addTag(value);
+            event.target.value = "";
+          }
+        });
+
+      function addTag(tagValue) {
+        if (tagValue) {
+          const tag = document.createElement("span");
+          tag.classList.add("tag");
+          tag.textContent = tagValue;
+
+          const close = document.createElement("span");
+          close.classList.add("close");
+          close.innerHTML = "&times;";
+          close.addEventListener("click", function () {
+            tag.remove();
+          });
+
+          tag.appendChild(close);
+
+          document
+            .getElementById("tagsContainer")
+            .insertBefore(tag, document.getElementById("tagsInput"));
+          updateTagsInput();
+        }
+      }
+
+      function updateTagsInput() {
+        const tagsArray = Array.from(document.querySelectorAll(".tag")).map(
+          (tag) => tag.textContent.trim().replace(/×/g, "")
+        );
+        document.getElementById("tagsData").value = JSON.stringify(tagsArray);
+      }
+
+      const addBook = () => {
+        document.getElementById("add").style.display = "none";
+        document.getElementById("addBook").style.display = "block";
+        document.getElementById("resource").style.display = "none";
+        document.getElementById("backBtn").style.display = "block";
+      };
+      const back = () => {
+        document.getElementById("add").style.display = "block";
+        document.getElementById("addBook").style.display = "none";
+        document.getElementById("resource").style.display = "block";
+        document.getElementById("backBtn").style.display = "none";
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".deleteBook");
+
+        deleteButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const confirmation = confirm("Are you sure you want to delete?");
+
+            if (confirmation) {
+              window.location.href = button.href;
+            } else {
+              return false;
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

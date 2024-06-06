@@ -1,0 +1,102 @@
+.Event-info {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.containers {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 5px;
+}
+
+a button{
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],input[type="date"],input[type="select"],input[type="file"], select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+#backBtn {
+  font-size: 30px;
+  margin: 10px 20px;
+  color: black;
+  display: none;
+  border: none;
+  background-color: transparent;
+}
+
+#add{
+  margin-top: 20px;
+}
+
+#addBtn {
+  width: 100%;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+#addEvent {
+  display: none;
+}
+
+.type{
+  background-color: rgb(146, 146, 146);
+  color: white;
+  margin: 10px 20px;
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 800;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 5px 15px;
+  margin-right: 5px;
+  position: relative;
+  border-radius: 5px;
+  margin: 5px 5px 10px 0px;
+}
+
+.tag .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.search-container {
+  width: 800px;
+  margin: 20px auto;
+  display: flex;
+}
+
+.search-input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 10px 0px 0px 10px !important;
+}
+
+.search-button {
+  width: 30%;
+  border-radius: 0px 10px 10px 0px !important;
+}
