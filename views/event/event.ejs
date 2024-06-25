@@ -112,7 +112,12 @@
                 <p class="card-text">Description: <%= event.desc %></p>
                 <p class="card-text">Location: <%= event.location %></p>
                 <p class="card-text">Website: <a href="<%= event.website %>" target="_blank"><%= event.website %></a></p>
+                <% if( user.userType == 'user') { %>
                 <a href="/event/<%= event._id %>" class="btn btn-primary">Apply</a>
+                <% } else {%>
+                <a href="/event/<%= event._id %>" class="btn btn-primary">view</a>
+                <a href="/event/<%= event._id %>" class="btn btn-primary">delete</a>
+                  <% }%>
               </div>
             </div>
           </div>

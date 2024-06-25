@@ -75,7 +75,7 @@ app.use("/event", eventRouter);
 app.use("/feedback", feedbackRouter);
 app.use("/logout", logout);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 app.listen(PORT, () => {
   console.log(`Server is running on Port ${PORT}`);
 });

@@ -43,62 +43,45 @@ const handleGetResource = async (req, res) => {
 };
 
 const handlePostResource = async (req, res) => {
-  const pdfPath = `./pdfs/${req.file.filename}`;
-  const outname = `${Date.now()}`;
+  const image = req.files.image ? req.files.image[0] : null;
+  const pdfFile = req.files.pdfFile ? req.files.pdfFile[0] : null;
+  try {
+    const bookName = req.body.bookName;
+    const author = req.body.author;
+    const publication = req.body.publication;
+    const type = req.body.type;
+    const desc = req.body.desc;
+    const bookPDF = pdfFile ? pdfFile.path : null;
+    const bookThumbnail =  image ? `/thumbnails/${image.filename}` : null;
+    const check = req.body.check === "on";
+    const tag = req.body.tags;
 
-  pdf2img.setOptions({
-    type: "png",
-    size: 1024,
-    density: 600,
-    outputdir: "./public/books",
-    outputname: outname,
-    page: 1,
-  });
+    const tags = JSON.parse(tag);
 
-  pdf2img.convert(pdfPath, async function (err, info) {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error converting PDF to image");
-    }
+    await Book.create({
+      bookName,
+      author,
+      publication,
+      type,
+      desc,
+      bookThumbnail,
+      bookPDF,
+      check,
+      tags,
+    });
 
-    try {
-      const bookName = req.body.bookName;
-      const author = req.body.author;
-      const publication = req.body.publication;
-      const type = req.body.type;
-      const desc = req.body.desc;
-      const bookThumbnail = `${outname}_1.png`;
-      const bookPDF = req.file.filename;
-      const check = req.body.check === "on";
-      const tag = req.body.tags;
-
-      const tags = JSON.parse(tag);
-
-      await Book.create({
-        bookName,
-        author,
-        publication,
-        type,
-        desc,
-        bookThumbnail,
-        bookPDF,
-        check,
-        tags,
-      });
-
-      res.redirect("/resource");
-    } catch (createError) {
-      console.error(createError);
-      res.status(500).send("Error saving book to database");
-    }
-  });
+    res.redirect("/resource");
+  } catch (createError) {
+    console.error(createError);
+    res.status(500).send("Error saving book to database");
+  }
 };
 
 const handleGetDelete = async (req, res) => {
   const _id = req.params.id;
   const book = await Book.findOne({ _id });
-  fs.unlinkSync(`pdfs/${book.bookPDF}`);
-  fs.unlinkSync(`public/books/${book.bookThumbnail}`);
+  fs.unlinkSync(`${book.bookPDF}`);
+  fs.unlinkSync(`public/${book.bookThumbnail}`);
   const apply = await Book.deleteOne({ _id });
   res.redirect("/resource");
 };

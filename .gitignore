@@ -5,6 +5,10 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
+
+public/thumbnails
+pdfs/
+
 # Logs
 logs
 *.log

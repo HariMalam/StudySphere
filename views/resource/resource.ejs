@@ -48,6 +48,16 @@
           />
         </div>
         <div class="form-group">
+          <label for="image">Book image</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept=".png"
+            required
+          />
+        </div>
+        <div class="form-group">
           <label for="type">Type</label>
           <select id="type" name="type" required>
             <option value="book">Book</option>
@@ -94,13 +104,13 @@
           <% books.forEach(book => { %>
           <div class="card">
             <a
-              href="pdfs/<%= book.bookPDF %>"
+              href="<%= book.bookPDF %>"
               target="_blank"
               class="card-link btn btn-primary link"
             >
               <div class="image">
                 <img
-                  src="/books/<%= book.bookThumbnail %>"
+                  src="<%= book.bookThumbnail %>"
                   class="card-img-top img"
                   alt="..."
                 />
@@ -133,13 +143,13 @@
           <% pyqs.forEach(book => { %>
           <div class="card">
             <a
-              href="pdfs/<%= book.bookPDF %>"
+              href="<%= book.bookPDF %>"
               target="_blank"
               class="card-link btn btn-primary link"
             >
               <div class="image">
                 <img
-                  src="/books/<%= book.bookThumbnail %>"
+                  src="<%= book.bookThumbnail %>"
                   class="card-img-top img"
                   alt="..."
                 />
@@ -172,13 +182,13 @@
           <% sylabuss.forEach(book => { %>
           <div class="card">
             <a
-              href="pdfs/<%= book.bookPDF %>"
+              href="<%= book.bookPDF %>"
               target="_blank"
               class="card-link btn btn-primary link"
             >
               <div class="image">
                 <img
-                  src="/books/<%= book.bookThumbnail %>"
+                  src="<%= book.bookThumbnail %>"
                   class="card-img-top img"
                   alt="..."
                 />
